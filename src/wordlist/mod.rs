@@ -95,11 +95,11 @@ pub fn parse_throw(throw: &str) -> std::result::Result<u32,Error> {
 
 fn validate_throw(throw: u32) -> std::result::Result<u32,Error> {
     let dice = vec![
-        throw / 10000,
-        throw % 10000 / 1000,
-        throw % 1000 / 100,
-        throw % 100 / 10,
         throw % 10,
+        throw % 100 / 10,
+        throw % 1000 / 100,
+        throw % 10000 / 1000,
+        throw / 10000,
     ];
 
     for die in dice {
