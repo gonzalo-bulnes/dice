@@ -22,6 +22,44 @@ mod tests {
         assert_eq!(None, lookup(11110));
         assert_eq!(None, lookup(66667));
     }
+
+    #[test]
+    fn parse_throw_rejects_non_numbers() {
+        assert_eq!(true, parse_throw("hello").is_err(), "Expected 'hello' to be rejected, was not");
+        assert_eq!(true, parse_throw("55555a").is_err(), "Expected '55555a' to be rejected, was not");
+        assert_eq!(true, parse_throw("4444b").is_err(), "Expected '4444b' to be rejected, was not");
+    }
+
+    #[test]
+    fn validate_throw_rejects_non_dice() {
+        assert_eq!(false, validate_throw(11111).is_err(), "Valid throw 11111 was rejected");
+        assert_eq!(false, validate_throw(15246).is_err(), "Valid throw 15246 was rejected");
+        assert_eq!(false, validate_throw(43161).is_err(), "Valid throw 43161 was rejected");
+        assert_eq!(false, validate_throw(66666).is_err(), "Valid throw 66666 was rejected");
+        assert_eq!(true, validate_throw(11711).is_err(), "Expected 11711 to be rejected, was not");
+        assert_eq!(true, validate_throw(66660).is_err(), "Expected 66660 to be rejected, was not");
+        assert_eq!(true, validate_throw(18111).is_err(), "Expected 18111 to be rejected, was not");
+        assert_eq!(true, validate_throw(01111).is_err(), "Expected 01111 to be rejected, was not");
+        assert_eq!(true, validate_throw(22292).is_err(), "Expected 22292 to be rejected, was not");
+    }
+
+    #[test]
+    fn validate_die_rejects_all_but_1_2_3_4_5_6() {
+        assert_eq!(false, validate_die(1).is_err(), "Valid die 1 was rejected");
+        assert_eq!(false, validate_die(2).is_err(), "Valid die 2 was rejected");
+        assert_eq!(false, validate_die(3).is_err(), "Valid die 3 was rejected");
+        assert_eq!(false, validate_die(4).is_err(), "Valid die 4 was rejected");
+        assert_eq!(false, validate_die(5).is_err(), "Valid die 5 was rejected");
+        assert_eq!(false, validate_die(6).is_err(), "Valid die 6 was rejected");
+        assert_eq!(true, validate_die(0).is_err(), "Expected 0 to be rejected, was not");
+        assert_eq!(true, validate_die(7).is_err(), "Expected 7 to be rejected, was not");
+        assert_eq!(true, validate_die(11).is_err(), "Expected 11 to be rejected, was not");
+    }
+}
+
+pub enum Error {
+    IsNotNumber(String),
+    IsNotDieValue(u32),
 }
 
 pub fn lookup(throw: u32) -> std::option::Option<String> {
@@ -37,4 +75,56 @@ pub fn lookup(throw: u32) -> std::option::Option<String> {
         None => None,
         Some(s) => Some((**s).clone()),
     }
+}
+
+pub fn parse_throw(throw: &str) -> std::result::Result<u32,Error> {
+    let throw = match throw.trim().parse() {
+        Ok(t) => t,
+        Err(_) => return Err(Error::IsNotNumber(String::from(throw))),
+    };
+
+    validate_throw(throw)
+}
+
+fn validate_throw(throw: u32) -> std::result::Result<u32,Error> {
+    let first = throw / 10000;
+    let second = throw % 10000 / 1000;
+    let third = throw % 1000 / 100;
+    let fourth = throw % 100 / 10;
+    let fifth = throw % 10;
+    let _ = match validate_die(first) {
+        Err(error) => return Err(error),
+        ok => ok,
+    };
+    let _ = match validate_die(second) {
+        Err(error) => return Err(error),
+        ok => ok,
+    };
+    let _ = match validate_die(third) {
+        Err(error) => return Err(error),
+        ok => ok,
+    };
+    let _ = match validate_die(fourth) {
+        Err(error) => return Err(error),
+        ok => ok,
+    };
+    let _ = match validate_die(fifth) {
+        Err(error) => return Err(error),
+        ok => ok,
+    };
+    Result::Ok(throw)
+}
+
+fn validate_die(die: u32) -> std::result::Result<u32,Error> {
+    use std::cmp::Ordering;
+
+    let die = match die.cmp(&1) {
+        Ordering::Less => return Err(Error::IsNotDieValue(die)),
+        _ => die,
+    };
+    let die = match die.cmp(&6) {
+        Ordering::Greater => return Err(Error::IsNotDieValue(die)),
+        _ => die,
+    };
+    Ok(die)
 }

@@ -1,1 +1,1 @@
-mod wordlist;
+pub mod wordlist;
