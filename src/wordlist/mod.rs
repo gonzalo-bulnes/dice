@@ -87,30 +87,19 @@ pub fn parse_throw(throw: &str) -> std::result::Result<u32,Error> {
 }
 
 fn validate_throw(throw: u32) -> std::result::Result<u32,Error> {
-    let first = throw / 10000;
-    let second = throw % 10000 / 1000;
-    let third = throw % 1000 / 100;
-    let fourth = throw % 100 / 10;
-    let fifth = throw % 10;
-    let _ = match validate_die(first) {
-        Err(error) => return Err(error),
-        ok => ok,
-    };
-    let _ = match validate_die(second) {
-        Err(error) => return Err(error),
-        ok => ok,
-    };
-    let _ = match validate_die(third) {
-        Err(error) => return Err(error),
-        ok => ok,
-    };
-    let _ = match validate_die(fourth) {
-        Err(error) => return Err(error),
-        ok => ok,
-    };
-    let _ = match validate_die(fifth) {
-        Err(error) => return Err(error),
-        ok => ok,
+    let dice = vec![
+        throw / 10000,
+        throw % 10000 / 1000,
+        throw % 1000 / 100,
+        throw % 100 / 10,
+        throw % 10,
+    ];
+
+    for die in dice {
+        let _ = match validate_die(die) {
+            Err(error) => return Err(error),
+            ok => ok,
+        };
     };
     Result::Ok(throw)
 }
