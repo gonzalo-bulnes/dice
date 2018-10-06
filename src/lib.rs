@@ -4,13 +4,13 @@ mod tests {
 
     #[test]
     fn lookup_with_valid_throw_returns_word() {
-        let expected = Some(std::string::String::from("abacus"));
+        let expected = Some(String::from("abacus"));
         assert_eq!(expected, lookup(11111));
 
-        let expected = Some(std::string::String::from("abdomen"));
+        let expected = Some(String::from("abdomen"));
         assert_eq!(expected, lookup(11112));
 
-        let expected = Some(std::string::String::from("zoom"));
+        let expected = Some(String::from("zoom"));
         assert_eq!(expected, lookup(66666));
     }
 
@@ -22,7 +22,7 @@ mod tests {
     }
 }
 
-fn lookup(throw: u32) -> std::option::Option<std::string::String> {
+pub fn lookup(throw: u32) -> std::option::Option<String> {
     use std::collections::HashMap;
 
     let throws = vec![11111, 11112, 66666];
