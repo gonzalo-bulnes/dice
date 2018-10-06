@@ -36,6 +36,7 @@ _To be defined._
 Contributing
 ------------
 
+[![Learn Rust](https://img.shields.io/badge/Learn-rust-d98c5e.svg?style=popout)](https://doc.rust-lang.org/book/index.html)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-e7359e.svg?style=popout)](http://makeapullrequest.com)
 
 Whether it is your first pull request or your 100th, the [contributing guidelines][contributing] are here to help you get started!
