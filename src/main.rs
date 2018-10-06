@@ -5,11 +5,20 @@ fn run_app() -> Result<(), String> {
     use std::io::Write;
     use dice::wordlist;
 
-    println!("Welcome to Dice!\n");
+    println!("Welcome to 🎲 Dice!\n");
+
+    println!("--------------------------------------------------------------------\n");
+    println!("This little program will give you the passphrase that corresponds to");
+    println!("the result of your dice throws, using EFF's long wordlist.\n");
+    println!("Haven't thrown your dice yet?\nPlease visit https://www.eff.org/dice for guidance!\n");
+    println!("You can lookup at once as many dice throws as you want,\njust separe them with a space.\n");
+    println!("Example:\n\n   Dice throws: 11111 22222 33333 44444 55555 66666\n");
+    println!("--------------------------------------------------------------------\n");
+
 
     // get user input
     let mut throws = String::new();
-    print!("Dice throws (as many as you want): ");
+    print!("Dice throws: ");
     io::stdout().flush().expect("Failed to write line");
     io::stdin().read_line(&mut throws)
         .expect("Failed to read line");
@@ -43,7 +52,7 @@ fn run_app() -> Result<(), String> {
     ).collect();
 
     // display passphrase
-    println!("Passphrase: {}", dice::passphrase(&words));
+    println!("Passphrase:  {}", dice::passphrase(&words));
 
     // display error messages if any
     if messages.len() > 0 {
