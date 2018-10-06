@@ -28,6 +28,10 @@ fn run_app() -> Result<(), String> {
     let split = throws.split(" ");
     let throws: Vec<&str> = split.collect();
 
+    if throws.len() == 1 && String::from(throws[0]).trim().is_empty() {
+        return Err(String::from("    - There is no passphrase because you didn't input any dice throw!"));
+    }
+
     // collect errors for friendly output
     let mut messages: Vec<String> = Vec::with_capacity(throws.len());
 

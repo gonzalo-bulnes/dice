@@ -30,6 +30,7 @@ mod tests {
         assert_eq!(true, parse_throw("hello").is_err(), "Expected 'hello' to be rejected, was not");
         assert_eq!(true, parse_throw("55555a").is_err(), "Expected '55555a' to be rejected, was not");
         assert_eq!(true, parse_throw("4444b").is_err(), "Expected '4444b' to be rejected, was not");
+        assert_eq!(true, parse_throw("").is_err(), "Expected '' to be rejected, was not");
     }
 
     #[test]
