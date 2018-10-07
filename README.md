@@ -31,7 +31,30 @@ Installation
 
 [![Build Status](https://travis-ci.org/gonzalo-bulnes/dice.svg?branch=master)](https://travis-ci.org/gonzalo-bulnes/dice)
 
-_To be defined._
+Binaries for official releases may be downloaded from the [releases page on GitHub](https://github.com/gonzalo-bulnes/dice/releases).
+
+If you want to compile it from source, try:
+
+```bash
+# clone the repository
+git clone git@github.com/gonzalo-bulnes/dice
+
+# compile the code
+cd dice
+cargo build --release
+
+# place the binary in you $PATH
+mv target/release/dice /usr/local/bin/dice \
+  && chmod +x /usr/local/bin/dice
+```
+
+For Unix/Linux users, you can install `dice` using the following command. You may want to change the version number in the command below from `v1.0.0-alpha` to whichever version you want:
+
+```bash
+curl -sL -o /usr/local/bin/dice \
+    https://github.com/gonzalo-bulnes/dice/releases/download/v1.0.0-alpha/dice \
+ && chmod +x /usr/local/bin/dice
+```
 
 Contributing
 ------------
