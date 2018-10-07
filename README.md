@@ -51,9 +51,9 @@ mv target/release/dice /usr/local/bin/dice \
 For Unix/Linux users, you can install `dice` using the following command. You may want to change the version number in the command below from `v1.0.0-alpha` to whichever version you want:
 
 ```bash
-curl -sL -o /usr/local/bin/dice \
-    https://github.com/gonzalo-bulnes/dice/releases/download/v1.0.0-alpha/dice-linux-amd64 \
- && chmod +x /usr/local/bin/dice
+sudo curl -sL -o /usr/local/bin/dice \
+  https://github.com/gonzalo-bulnes/dice/releases/download/v1.0.0-alpha/dice-linux-amd64 \
+  && sudo chmod +x /usr/local/bin/dice
 ```
 
 Contributing

@@ -6,7 +6,7 @@ fn run_app() -> Result<(), String> {
     use dice::wordlist;
 
     println!("Welcome to 🎲 Dice!");
-    println!("v0.1.0\n");
+    println!("v1.0.0-alpha\n");
 
     println!("--------------------------------------------------------------------\n");
     println!("This little program will give you the passphrase that corresponds to");
