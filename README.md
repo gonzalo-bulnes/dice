@@ -52,7 +52,7 @@ For Unix/Linux users, you can install `dice` using the following command. You ma
 
 ```bash
 curl -sL -o /usr/local/bin/dice \
-    https://github.com/gonzalo-bulnes/dice/releases/download/v1.0.0-alpha/dice \
+    https://github.com/gonzalo-bulnes/dice/releases/download/v1.0.0-alpha/dice-linux-amd64 \
  && chmod +x /usr/local/bin/dice
 ```
 
@@ -69,6 +69,7 @@ This is my first Rust program! You're welcome to [open a PR](#pull-requests) to 
 
 - making the Rust code more idiomatic
 - leveraging modules and ownership for better code readability
+- **building static releases for other platforms**
 - anything else that you find relevant!
 
 
