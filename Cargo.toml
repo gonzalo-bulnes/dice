@@ -1,0 +1,6 @@
+[package]
+name = "dice"
+version = "0.1.0"
+authors = ["Gonzalo Bulnes Guilpain <gon.bulnes@fastmail.com>"]
+
+[dependencies]

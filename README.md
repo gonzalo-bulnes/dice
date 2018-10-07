@@ -31,12 +31,49 @@ Installation
 
 [![Build Status](https://travis-ci.org/gonzalo-bulnes/dice.svg?branch=master)](https://travis-ci.org/gonzalo-bulnes/dice)
 
-_To be defined._
+Binaries for official releases may be downloaded from the [releases page on GitHub](https://github.com/gonzalo-bulnes/dice/releases).
+
+If you want to compile it from source, try:
+
+```bash
+# clone the repository
+git clone git@github.com/gonzalo-bulnes/dice
+
+# compile the code
+cd dice
+cargo build --release
+
+# place the binary in you $PATH
+mv target/release/dice /usr/local/bin/dice \
+  && chmod +x /usr/local/bin/dice
+```
+
+For Unix/Linux users, you can install `dice` using the following command. You may want to change the version number in the command below from `v1.0.0-alpha` to whichever version you want:
+
+```bash
+curl -sL -o /usr/local/bin/dice \
+    https://github.com/gonzalo-bulnes/dice/releases/download/v1.0.0-alpha/dice-linux-amd64 \
+ && chmod +x /usr/local/bin/dice
+```
 
 Contributing
 ------------
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-e7359e.svg?style=popout)](http://makeapullrequest.com)
+[![Learn Rust](https://img.shields.io/badge/Learn-rust-d98c5e.svg?style=popout)](https://doc.rust-lang.org/book/index.html)
+[![PRs Welcome](https://img.shields.io/badge/pull%20requests-welcome-e7359e.svg?style=popout)](http://makeapullrequest.com)
+![Code Review Welcome](https://img.shields.io/badge/code%20review-welcome-e7359e.svg?style=popout)
+
+### Code review
+
+This is my first Rust program! You're welcome to [open a PR](#pull-requests) to walk me through any refactoring that would help me learn about:
+
+- making the Rust code more idiomatic
+- leveraging modules and ownership for better code readability
+- **building static releases for other platforms**
+- anything else that you find relevant!
+
+
+### Pull requests
 
 Whether it is your first pull request or your 100th, the [contributing guidelines][contributing] are here to help you get started!
 
