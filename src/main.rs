@@ -2,20 +2,18 @@ extern crate dice;
 
 fn run_app() -> Result<(), String> {
     use std::io;
-    use std::io::Write;
     use dice::cli;
     use dice::wordlist;
 
     let output = io::stdout();
-
     cli::welcome(output);
 
-    // get user input
-    let mut throws = String::new();
-    print!("Dice throws: ");
-    io::stdout().flush().expect("Failed to write line");
-    io::stdin().read_line(&mut throws)
-        .expect("Failed to read line");
+    let output = io::stdout();
+    cli::prompt_for_user_input(output);
+
+    let stdio = io::stdin();
+    let input = stdio.lock();
+    let throws = cli::get_user_input(input);
 
     // convert string to valid list of numbers
     let split = throws.split(" ");
