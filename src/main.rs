@@ -6,7 +6,7 @@ fn run_app() -> Result<(), String> {
     use dice::cli;
     use dice::wordlist;
 
-    println!("{}", cli::WELCOME);
+    println!("{}", cli::welcome());
 
     // get user input
     let mut throws = String::new();
