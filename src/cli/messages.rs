@@ -20,3 +20,5 @@ Example:
 "#;
 
 pub const PROMPT: &str = "Dice throws: ";
+
+pub const PASSWORD_PREFIX: &str = "Passphrase: ";

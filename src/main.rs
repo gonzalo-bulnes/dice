@@ -47,8 +47,8 @@ fn run_app() -> Result<(), String> {
         wordlist::lookup(throw)
     ).collect();
 
-    // display passphrase
-    println!("Passphrase:  {}", dice::passphrase(&words));
+    let output = io::stdout();
+    cli::display_passphrase(output, &dice::passphrase(&words));
 
     // display error messages if any
     if messages.len() > 0 {

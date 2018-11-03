@@ -8,6 +8,18 @@ mod tests {
     use super::*;
 
     #[test]
+    fn display_passphrase_prints_it_to_output() {
+        let mut output = Vec::new();
+
+        display_passphrase(&mut output, "correct horse battery staple");
+
+        let output = String::from_utf8(output).expect("Expected UTF-8 output, was not");
+
+        assert!(output.contains("correct horse battery staple"),
+            "Expected output to contain passphrase, did not");
+    }
+
+    #[test]
     fn get_user_input_works() {
         let input = b"12345 65432";
 
@@ -50,6 +62,11 @@ mod tests {
         assert!(output.contains("v1.0.0-alpha"),
             "Expected output to contain Dice version number, did not");
     }
+}
+
+pub fn display_passphrase<W>(mut output: W, passphrase: &str) where W: Write {
+    write!(&mut output, "{}{}", messages::PASSWORD_PREFIX, passphrase).expect("Unable to write to output");;
+    return
 }
 
 pub fn get_user_input<R>(mut input: R) -> String where R: BufRead {
