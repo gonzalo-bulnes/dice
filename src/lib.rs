@@ -1,4 +1,8 @@
+pub mod cli;
 pub mod wordlist;
+
+const PLACEHOLDER: &str = "-----";
+const SEPARATOR: &str = " ";
 
 #[cfg(test)]
 mod tests {
@@ -42,17 +46,15 @@ mod tests {
     }
 }
 
-
-
 pub fn passphrase(words: &Vec<Option<String>>) -> String {
     let words: Vec<String> = words.iter().map(|word|
         match word {
             Some(word) => word.clone(),
-            None => String::from("-----"),
+            None => String::from(PLACEHOLDER),
         }
     ).collect();
 
     let mut words = words.clone();
     words.retain(|word| !word.is_empty());
-    words.join(" ")
+    words.join(SEPARATOR)
 }

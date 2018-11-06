@@ -2,40 +2,20 @@ extern crate dice;
 
 fn run_app() -> Result<(), String> {
     use std::io;
-    use std::io::Write;
+    use dice::cli;
     use dice::wordlist;
 
-    println!(r#"Welcome to 🎲 Dice!
-v1.0.0-alpha
+    let output = io::stdout();
+    cli::welcome(output);
 
---------------------------------------------------------------------
+    let output = io::stdout();
+    cli::prompt_for_user_input(output);
 
-This little program will give you the passphrase that corresponds to
-the result of your dice throws, using EFF's long wordlist.
+    let stdio = io::stdin();
+    let input = stdio.lock();
+    let throws = cli::get_user_input(input);
 
-Haven't thrown your dice yet?
-Please visit https://www.eff.org/dice for guidance!
-
-You can lookup at once as many dice throws as you want,
-just separe them with a space.
-
-Example:
-
-   Dice throws: 11111 22222 33333 44444 55555 66666
-
---------------------------------------------------------------------
-"#);
-
-    // get user input
-    let mut throws = String::new();
-    print!("Dice throws: ");
-    io::stdout().flush().expect("Failed to write line");
-    io::stdin().read_line(&mut throws)
-        .expect("Failed to read line");
-
-    // convert string to valid list of numbers
-    let split = throws.split(" ");
-    let throws: Vec<&str> = split.collect();
+    let throws = cli::parse_user_input(&throws);
 
     if throws.len() == 1 && String::from(throws[0]).trim().is_empty() {
         return Err(String::from("    - There is no passphrase because you didn't input any dice throw!"));
@@ -65,8 +45,8 @@ Example:
         wordlist::lookup(throw)
     ).collect();
 
-    // display passphrase
-    println!("Passphrase:  {}", dice::passphrase(&words));
+    let output = io::stdout();
+    cli::display_passphrase(output, &dice::passphrase(&words));
 
     // display error messages if any
     if messages.len() > 0 {
