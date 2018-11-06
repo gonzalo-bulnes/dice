@@ -1,4 +1,6 @@
+mod input;
 mod messages;
+mod output;
 
 use std::io::BufRead;
 use std::io::Write;
@@ -64,23 +66,18 @@ mod tests {
     }
 }
 
-pub fn display_passphrase<W>(mut output: W, passphrase: &str) where W: Write {
-    write!(&mut output, "{}{}", messages::PASSWORD_PREFIX, passphrase).expect("Unable to write to output");;
-    return
+pub fn display_passphrase<W>(output: W, passphrase: &str) where W: Write {
+    output::passphrase(output, passphrase);
 }
 
-pub fn get_user_input<R>(mut input: R) -> String where R: BufRead {
-    let mut throws = String::new();
-    input.read_line(&mut throws)
-        .expect("Failed to read line from input");
-    throws
+pub fn get_user_input<R>(input: R) -> String where R: BufRead {
+    return input::get_from_user(input);
 }
 
-pub fn prompt_for_user_input<W>(mut output: W,) where W: Write {
-    write!(&mut output, "{}", messages::PROMPT).expect("Unable to write to output");
-    output.flush().expect("Unable to write to output");
+pub fn prompt_for_user_input<W>(output: W,) where W: Write {
+    output::prompt_for_user_input(output);
 }
 
-pub fn welcome<W>(mut output: W) where W: Write {
-    write!(&mut output, "{}", messages::WELCOME).expect("Unable to write to output");
+pub fn welcome<W>(output: W) where W: Write {
+    output::welcome(output);
 }
