@@ -6,3 +6,8 @@ pub fn get_from_user<R>(mut input: R) -> String where R: BufRead {
         .expect("Failed to read line from input");
     throws
 }
+
+pub fn parse(throws: &String) -> Vec<&str> {
+    let split = throws.split(" ");
+    return split.collect();
+}

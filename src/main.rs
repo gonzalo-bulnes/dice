@@ -15,9 +15,7 @@ fn run_app() -> Result<(), String> {
     let input = stdio.lock();
     let throws = cli::get_user_input(input);
 
-    // convert string to valid list of numbers
-    let split = throws.split(" ");
-    let throws: Vec<&str> = split.collect();
+    let throws = cli::parse_user_input(&throws);
 
     if throws.len() == 1 && String::from(throws[0]).trim().is_empty() {
         return Err(String::from("    - There is no passphrase because you didn't input any dice throw!"));
